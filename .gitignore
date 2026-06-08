@@ -32,8 +32,11 @@ yarn-error.log*
 .env*
 !.env.example
 
-# vercel
-.vercel
+# netlify
+.netlify
+
+# claude code (interne lock-/statebestanden)
+.claude/
 
 # typescript
 *.tsbuildinfo
