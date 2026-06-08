@@ -3,7 +3,7 @@ import { SYSTEM_PROMPT } from "./systemPrompt";
 import { InterpretationSchema, type Interpretation } from "./schema";
 
 const TEXT_MODEL = "gemini-2.5-flash";
-const IMAGE_MODEL = "gemini-2.5-flash-image-preview";
+const IMAGE_MODEL = "gemini-2.5-flash-image";
 
 function getClient(): GoogleGenAI {
   const apiKey = process.env.GEMINI_API_KEY;
