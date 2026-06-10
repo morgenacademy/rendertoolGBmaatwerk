@@ -13,27 +13,27 @@ export function ChangesPanel({ revision }: Props) {
 
   if (!revision || !revision.summary) {
     return (
-      <div className="rounded-xl border border-dashed border-neutral-300 bg-white p-5 text-sm text-neutral-500">
+      <div className="rounded-3xl border border-dashed border-brand-line bg-white p-5 text-sm text-brand-muted">
         Nog geen revisie. Geef een wijzigingsverzoek om te starten.
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-brand-line bg-white p-5 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-muted">
           {revision.label}
         </span>
       </div>
 
-      <p className="mb-4 text-base font-medium text-neutral-900">{revision.summary}</p>
+      <p className="mb-4 text-base font-medium text-brand">{revision.summary}</p>
 
       {revision.changes.length > 0 && (
         <ul className="space-y-2">
           {revision.changes.map((c, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-neutral-700">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-accent" />
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
               <span>{c}</span>
             </li>
           ))}

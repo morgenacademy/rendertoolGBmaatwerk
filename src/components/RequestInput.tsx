@@ -43,17 +43,17 @@ export function RequestInput({ onSubmit, isGenerating, disabled }: Props) {
 
   return (
     <div className="flex flex-col gap-3">
-      <label className="text-sm font-medium text-neutral-700">Wijzigingsverzoek</label>
+      <label className="text-sm font-medium text-brand">Wijzigingsverzoek</label>
 
-      <div className="flex gap-1 rounded-lg bg-neutral-100 p-1">
+      <div className="flex gap-1 rounded-full border border-brand-line bg-white p-1">
         <button
           type="button"
           onClick={() => setMode("meubel")}
           disabled={disabled || isGenerating}
-          className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition ${
+          className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition ${
             mode === "meubel"
-              ? "bg-white text-neutral-900 shadow-sm"
-              : "text-neutral-500 hover:text-neutral-700"
+              ? "bg-brand text-brand-cream shadow-sm"
+              : "text-brand-muted hover:text-brand"
           } disabled:cursor-not-allowed disabled:opacity-60`}
         >
           <Sofa className="h-4 w-4" /> Meubel
@@ -62,16 +62,16 @@ export function RequestInput({ onSubmit, isGenerating, disabled }: Props) {
           type="button"
           onClick={() => setMode("omgeving")}
           disabled={disabled || isGenerating}
-          className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition ${
+          className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition ${
             mode === "omgeving"
-              ? "bg-white text-neutral-900 shadow-sm"
-              : "text-neutral-500 hover:text-neutral-700"
+              ? "bg-brand text-brand-cream shadow-sm"
+              : "text-brand-muted hover:text-brand"
           } disabled:cursor-not-allowed disabled:opacity-60`}
         >
           <Mountain className="h-4 w-4" /> Omgeving & sfeer
         </button>
       </div>
-      <p className="-mt-1 text-xs text-neutral-500">{MODE_HINT[mode]}</p>
+      <p className="-mt-1 text-xs text-brand-muted">{MODE_HINT[mode]}</p>
 
       <textarea
         value={text}
@@ -85,7 +85,7 @@ export function RequestInput({ onSubmit, isGenerating, disabled }: Props) {
         }
         rows={4}
         disabled={disabled || isGenerating}
-        className="w-full resize-none rounded-lg border border-neutral-300 bg-white p-3 text-sm shadow-sm focus:border-brand-accent focus:outline-none focus:ring-1 focus:ring-brand-accent disabled:bg-neutral-50 disabled:text-neutral-500"
+        className="w-full resize-none rounded-2xl border border-brand-line bg-white p-3 text-sm shadow-sm focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand disabled:bg-brand-surface disabled:text-brand-muted"
         onKeyDown={(e) => {
           if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
             e.preventDefault();
@@ -96,7 +96,7 @@ export function RequestInput({ onSubmit, isGenerating, disabled }: Props) {
       <button
         onClick={submit}
         disabled={disabled || isGenerating || !text.trim()}
-        className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300"
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-brand-cream shadow-sm hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-brand-line disabled:text-brand-muted"
       >
         <Wand2 className="h-4 w-4" />
         {isGenerating ? "Bezig…" : "Genereer revisie"}
@@ -109,7 +109,7 @@ export function RequestInput({ onSubmit, isGenerating, disabled }: Props) {
               key={s}
               type="button"
               onClick={() => setText(s)}
-              className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-600 hover:border-neutral-300 hover:bg-neutral-50"
+              className="rounded-full border border-brand-line bg-white px-3 py-1 text-xs text-brand-muted hover:border-brand hover:text-brand"
             >
               {s}
             </button>

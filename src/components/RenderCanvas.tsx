@@ -69,7 +69,7 @@ export function RenderCanvas({ imageDataUrl, onUpload, isGenerating }: Props) {
   );
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center rounded-2xl border border-neutral-200 bg-white overflow-hidden">
+    <div className="relative flex h-full w-full items-center justify-center rounded-4xl border border-brand-line bg-white overflow-hidden">
       {imageDataUrl ? (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -80,7 +80,7 @@ export function RenderCanvas({ imageDataUrl, onUpload, isGenerating }: Props) {
           />
           <button
             onClick={() => inputRef.current?.click()}
-            className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-lg bg-white/90 px-3 py-2 text-sm font-medium text-neutral-700 shadow-md ring-1 ring-neutral-200 hover:bg-white"
+            className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-brand shadow-md ring-1 ring-brand-line hover:bg-white"
             disabled={isGenerating}
           >
             <Upload className="h-4 w-4" /> Vervang basisrender
@@ -97,7 +97,7 @@ export function RenderCanvas({ imageDataUrl, onUpload, isGenerating }: Props) {
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
           className={`flex h-full w-full flex-col items-center justify-center gap-3 border-2 border-dashed transition-colors ${
-            isDragging ? "border-brand-accent bg-amber-50" : "border-neutral-300 bg-neutral-50"
+            isDragging ? "border-brand bg-brand-surface" : "border-brand-line bg-brand-surface/50"
           }`}
         >
           <ImageIcon className="h-12 w-12 text-neutral-400" />

@@ -22,8 +22,8 @@ export function RevisionHistory({ revisions, activeRevisionId, onSelect, onClear
             <button
               key={rev.id}
               onClick={() => onSelect(rev.id)}
-              className={`group relative flex shrink-0 flex-col items-center gap-1 rounded-lg border-2 p-1 transition ${
-                isActive ? "border-brand-accent" : "border-transparent hover:border-neutral-300"
+              className={`group relative flex shrink-0 flex-col items-center gap-1 rounded-2xl border-2 p-1 transition ${
+                isActive ? "border-brand" : "border-transparent hover:border-brand-line"
               }`}
               title={rev.userRequest ?? "Originele upload"}
             >
@@ -31,10 +31,10 @@ export function RevisionHistory({ revisions, activeRevisionId, onSelect, onClear
               <img
                 src={rev.imageDataUrl}
                 alt={rev.label}
-                className="h-20 w-28 rounded-md object-cover ring-1 ring-neutral-200"
+                className="h-20 w-28 rounded-xl object-cover ring-1 ring-brand-line"
               />
               <span
-                className={`text-xs ${isActive ? "font-semibold text-neutral-900" : "text-neutral-600"}`}
+                className={`text-xs ${isActive ? "font-semibold text-brand" : "text-brand-muted"}`}
               >
                 {rev.label}
               </span>
@@ -46,7 +46,7 @@ export function RevisionHistory({ revisions, activeRevisionId, onSelect, onClear
         onClick={() => {
           if (confirm("Sessie wissen? Alle revisies gaan verloren.")) onClear();
         }}
-        className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3 py-2 text-xs text-neutral-600 hover:border-red-200 hover:bg-red-50 hover:text-red-700"
+        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-brand-line bg-white px-4 py-2 text-xs text-brand-muted hover:border-red-200 hover:bg-red-50 hover:text-red-700"
         title="Sessie wissen"
       >
         <Trash2 className="h-3.5 w-3.5" />

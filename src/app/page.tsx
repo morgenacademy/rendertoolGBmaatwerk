@@ -134,13 +134,17 @@ export default function Page() {
   return (
     <main className="mx-auto flex min-h-screen max-w-[1600px] flex-col gap-6 p-6">
       <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight text-neutral-900">
-            Rendertool — GB Maatwerkinterieur
-          </h1>
-          <p className="text-sm text-neutral-500">
-            Pas een render aan met natuurlijke taal. Camera, ruimte en licht blijven gelijk.
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="relative flex h-14 w-14 items-center justify-center rounded-4xl bg-brand">
+            <span className="text-xl font-bold tracking-tight text-brand-cream">GB</span>
+            <span className="absolute bottom-2.5 right-2.5 h-1.5 w-1.5 rounded-full bg-brand-cream" />
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold tracking-tight text-brand">Rendertool</h1>
+            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-brand-muted">
+              GB Maatwerk Interieur
+            </p>
+          </div>
         </div>
         <DownloadButton revision={activeRevision} />
       </header>
@@ -169,7 +173,7 @@ export default function Page() {
             disabled={!activeRevision}
           />
           {error && (
-            <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 ring-1 ring-red-200">
+            <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700 ring-1 ring-red-200">
               {error}
             </div>
           )}
