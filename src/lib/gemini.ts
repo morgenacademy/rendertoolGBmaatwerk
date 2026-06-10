@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { SYSTEM_PROMPT } from "./systemPrompt";
+import { buildSystemPrompt, type RenderMode } from "./systemPrompt";
 import { InterpretationSchema, type Interpretation } from "./schema";
 
 const TEXT_MODEL = "gemini-2.5-flash";
@@ -31,6 +31,7 @@ export async function interpretRequest(args: {
   mimeType: string;
   userRequest: string;
   history: { userRequest: string; summary: string }[];
+  mode: RenderMode;
 }): Promise<Interpretation> {
   const ai = getClient();
 
@@ -60,7 +61,7 @@ Analyze the attached render and respond with valid JSON only, no markdown fences
   const response = await ai.models.generateContent({
     model: TEXT_MODEL,
     config: {
-      systemInstruction: SYSTEM_PROMPT,
+      systemInstruction: buildSystemPrompt(args.mode),
       responseMimeType: "application/json",
       temperature: 0.4,
     },
@@ -99,10 +100,26 @@ Analyze the attached render and respond with valid JSON only, no markdown fences
   return result.data;
 }
 
+const STRICT_RULES: Record<RenderMode, string> = {
+  meubel: `STRICT RULES — follow them exactly:
+- Preserve camera angle, perspective, room geometry, walls, floor, ceiling, windows, doors and lighting EXACTLY.
+- Modify ONLY the specific furniture/cabinetry surfaces or elements described in the instruction below. Leave everything else pixel-identical to the original.
+- Do NOT add, remove, invent, split or merge any cabinets, shelves, drawers, doors, handles, panels or compartments.
+- Any open, empty or recessed area (niche, alcove, open compartment) MUST stay exactly as empty and open as in the original image. Never fill it with invented cabinetry or objects.
+- If the instruction is only a material/finish change, change ONLY the colour/material/texture of the named surfaces; keep all geometry, edges, divisions and openings identical.`,
+
+  omgeving: `STRICT RULES — follow them exactly:
+- Preserve camera angle, perspective and framing EXACTLY.
+- Keep the custom furniture/cabinetry PIXEL-IDENTICAL in shape, layout, position, proportions, panel divisions, openings, materials and colours. Do NOT redesign, move or restyle the cabinetry.
+- You MAY restyle the environment as described in the instruction: walls, floor, ceiling, lighting, background, atmosphere and overall photorealism.
+- Do NOT add invented cabinetry; any empty or recessed area in the furniture stays empty.`,
+};
+
 export async function generateRender(args: {
   baseImageBase64: string;
   mimeType: string;
   renderPrompt: string;
+  mode: RenderMode;
 }): Promise<{ imageBase64: string; mimeType: string }> {
   const ai = getClient();
 
@@ -121,12 +138,7 @@ export async function generateRender(args: {
           {
             text: `Edit this interior render according to the following instructions.
 
-STRICT RULES — follow them exactly:
-- Preserve camera angle, perspective, room geometry, walls, floor, windows, doors and lighting EXACTLY.
-- Modify ONLY the specific surfaces/elements described in the instruction below. Leave everything else pixel-identical to the original.
-- Do NOT add, remove, invent, split or merge any cabinets, shelves, drawers, doors, handles, panels or compartments.
-- Any open, empty or recessed area (niche, alcove, open compartment) MUST stay exactly as empty and open as in the original image. Never fill it with invented cabinetry or objects.
-- If the instruction is only a material/finish change, change ONLY the colour/material/texture of the named surfaces; keep all geometry, edges, divisions and openings identical.
+${STRICT_RULES[args.mode]}
 
 Instruction:
 ${args.renderPrompt}`,

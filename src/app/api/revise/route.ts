@@ -21,17 +21,21 @@ export async function POST(req: Request) {
   }
 
   try {
+    const mode = body.mode === "omgeving" ? "omgeving" : "meubel";
+
     const interpretation = await interpretRequest({
       imageBase64: body.imageBase64,
       mimeType: body.mimeType,
       userRequest: body.userRequest,
       history: body.history ?? [],
+      mode,
     });
 
     const render = await generateRender({
       baseImageBase64: body.imageBase64,
       mimeType: body.mimeType,
       renderPrompt: interpretation.render_prompt,
+      mode,
     });
 
     const response: ReviseResponse = {

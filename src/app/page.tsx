@@ -7,7 +7,7 @@ import { RevisionHistory } from "@/components/RevisionHistory";
 import { ChangesPanel } from "@/components/ChangesPanel";
 import { DownloadButton } from "@/components/DownloadButton";
 import { loadSession, saveSession, clearSession } from "@/lib/storage";
-import type { Revision, ReviseRequest, ReviseResponse } from "@/types";
+import type { Revision, ReviseRequest, ReviseResponse, RenderMode } from "@/types";
 
 function newId(): string {
   return crypto.randomUUID();
@@ -78,7 +78,7 @@ export default function Page() {
   );
 
   const handleSubmit = useCallback(
-    async (userRequest: string) => {
+    async (userRequest: string, mode: RenderMode) => {
       if (!activeRevision) return;
       setIsGenerating(true);
       setError(null);
@@ -89,6 +89,7 @@ export default function Page() {
           mimeType,
           userRequest,
           history: buildHistoryForRequest(activeRevision.id),
+          mode,
         };
         const res = await fetch("/api/revise", {
           method: "POST",

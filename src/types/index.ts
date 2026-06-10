@@ -10,11 +10,14 @@ export type Revision = {
   renderPrompt: string | null;
 };
 
+export type RenderMode = "meubel" | "omgeving";
+
 export type ReviseRequest = {
   imageBase64: string;
   mimeType: string;
   userRequest: string;
   history: { userRequest: string; summary: string }[];
+  mode: RenderMode;
 };
 
 export type ReviseResponse = {
