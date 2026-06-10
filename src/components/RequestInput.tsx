@@ -10,10 +10,10 @@ type Props = {
 };
 
 const SUGGESTIONS = [
-  "Maak de bovenkasten 20 cm hoger.",
-  "Vervang de onderkasten door greeploze lades.",
-  "Voeg een open vak toe in het midden.",
-  "Maak het meubel luxer met fineerafwerking.",
+  "Maak de fronten mat zwart.",
+  "Geef het werkblad een marmerlook.",
+  "Verander de kleur van de kasten naar warm eiken.",
+  "Maak de afwerking hoogglans wit.",
 ];
 
 export function RequestInput({ onSubmit, isGenerating, disabled }: Props) {

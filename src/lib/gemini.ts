@@ -119,7 +119,17 @@ export async function generateRender(args: {
             },
           },
           {
-            text: `Edit this interior render according to the following instructions. Preserve camera angle, room geometry, walls, windows, doors and lighting exactly. Only modify the cabinetry/furniture elements described:\n\n${args.renderPrompt}`,
+            text: `Edit this interior render according to the following instructions.
+
+STRICT RULES — follow them exactly:
+- Preserve camera angle, perspective, room geometry, walls, floor, windows, doors and lighting EXACTLY.
+- Modify ONLY the specific surfaces/elements described in the instruction below. Leave everything else pixel-identical to the original.
+- Do NOT add, remove, invent, split or merge any cabinets, shelves, drawers, doors, handles, panels or compartments.
+- Any open, empty or recessed area (niche, alcove, open compartment) MUST stay exactly as empty and open as in the original image. Never fill it with invented cabinetry or objects.
+- If the instruction is only a material/finish change, change ONLY the colour/material/texture of the named surfaces; keep all geometry, edges, divisions and openings identical.
+
+Instruction:
+${args.renderPrompt}`,
           },
         ],
       },
