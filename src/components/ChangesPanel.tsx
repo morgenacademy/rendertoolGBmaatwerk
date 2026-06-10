@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Check, ChevronDown, ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
 import type { Revision } from "@/types";
 
 type Props = {
@@ -9,8 +8,6 @@ type Props = {
 };
 
 export function ChangesPanel({ revision }: Props) {
-  const [showPrompt, setShowPrompt] = useState(false);
-
   if (!revision || !revision.summary) {
     return (
       <div className="rounded-3xl border border-dashed border-brand-line bg-white p-5 text-sm text-brand-muted">
@@ -38,27 +35,6 @@ export function ChangesPanel({ revision }: Props) {
             </li>
           ))}
         </ul>
-      )}
-
-      {revision.renderPrompt && (
-        <div className="mt-5 border-t border-neutral-100 pt-3">
-          <button
-            onClick={() => setShowPrompt((v) => !v)}
-            className="inline-flex items-center gap-1 text-xs font-medium text-neutral-500 hover:text-neutral-700"
-          >
-            {showPrompt ? (
-              <ChevronDown className="h-3.5 w-3.5" />
-            ) : (
-              <ChevronRight className="h-3.5 w-3.5" />
-            )}
-            Render-prompt (voor beeldmodel)
-          </button>
-          {showPrompt && (
-            <pre className="mt-2 whitespace-pre-wrap rounded-md bg-neutral-50 p-3 text-xs text-neutral-600 ring-1 ring-neutral-100">
-              {revision.renderPrompt}
-            </pre>
-          )}
-        </div>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { RenderCanvas } from "@/components/RenderCanvas";
 import { RequestInput } from "@/components/RequestInput";
 import { RevisionHistory } from "@/components/RevisionHistory";
@@ -135,9 +136,15 @@ export default function Page() {
     <main className="mx-auto flex min-h-screen max-w-[1600px] flex-col gap-6 p-6">
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="relative flex h-14 w-14 items-center justify-center rounded-4xl bg-brand">
-            <span className="text-xl font-bold tracking-tight text-brand-cream">GB</span>
-            <span className="absolute bottom-2.5 right-2.5 h-1.5 w-1.5 rounded-full bg-brand-cream" />
+          <div className="relative h-14 w-14 overflow-hidden rounded-4xl bg-brand">
+            <Image
+              src="/logo.png"
+              alt="GB Maatwerk Interieur"
+              fill
+              sizes="56px"
+              className="object-cover"
+              priority
+            />
           </div>
           <div>
             <h1 className="text-xl font-semibold tracking-tight text-brand">Rendertool</h1>
